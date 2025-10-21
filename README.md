@@ -83,3 +83,22 @@
 
 ```bash
 python main.py -f targets.txt
+可选参数:
+
+-o OUTPUT_FILE, --output OUTPUT_FILE: 指定输出 CSV 文件的路径 (默认: results.csv)。
+-a ALIVE_FILE, --alive ALIVE_FILE: 指定输出存活域名文件的路径 (默认: alive.txt)。
+输入文件格式 (targets.txt)
+
+文件应包含每行一个目标，支持以下格式：
+# 这是一条注释，会被忽略
+154.86.32.0/24         # CIDR 网络范围
+maiuedu.com            # 域名
+154.86.30.12-233       # IP 范围
+http://xawsjsxy.com    # 完整 URL (协议会被剥离，域名被提取)
+https://xawsjsxy.com   # 完整 URL
+192.168.1.100          # 单个 IP 地址
+
+配置
+代理源: 可以在 process_ips_and_domains 函数内的 proxy_urls 列表中添加或删除代理池的 URL。
+API 密钥: 如果使用的权重查询 API 需要认证，请在 query_baidu_weight 函数中添加相应的认证头信息。
+线程数: 可以调整 ThreadPoolExecutor 的 max_workers 参数来改变并发线程数，以适应您的硬件和网络环境。
